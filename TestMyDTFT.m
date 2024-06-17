@@ -1,7 +1,6 @@
 %% run the following in the MATLAB command window:
 % results = runtests('TestMyDTFT');
 % disp(results);
-This should resolve the issues and correctly verify the results.
 
 classdef TestMyDTFT < matlab.unittest.TestCase
     methods (Test)
