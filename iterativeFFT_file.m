@@ -13,6 +13,19 @@ function main
 
     disp('Built-in FFT:');
     disp(X_builtin);
+
+    % Test the inverse FFT function
+    x_inverse = inverseFFT(X_iterative);
+
+    % Compare with MATLAB's built-in IFFT function
+    x_builtin_inverse = ifft(X_builtin);
+
+    % Display the results
+    disp('Inverse FFT (custom):');
+    disp(x_inverse);
+
+    disp('Inverse FFT (builtin):');
+    disp(x_builtin_inverse);
 end
 
 function X = iterativeFFT(x)
@@ -39,6 +52,22 @@ function X = iterativeFFT(x)
             end
         end
     end
+
+    return;  % Explicit return statement
+end
+
+function X = inverseFFT(X)
+    % Inverse FFT implementation using the iterative FFT function
+    % Input:
+    %   X - input signal (vector of complex numbers)
+    % Output:
+    %   x - inverse FFT of the input signal
+
+    N = length(X);
+    X = conj(X);  % Conjugate the input signal
+    X = iterativeFFT(X);  % Apply the FFT
+    X = conj(X);  % Conjugate the result
+    X = X / N;  % Normalize by dividing by the length
 
     return;  % Explicit return statement
 end
@@ -80,5 +109,3 @@ function r = bitrev(k, bits)
 
     return;  % Explicit return statement
 end
-
-
