@@ -18,3 +18,5 @@ end
 matrix = exp(-1j*(n*omega));
 X = x*matrix;
 end
+
+% test
