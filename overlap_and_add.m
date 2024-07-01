@@ -18,6 +18,9 @@ function y = overlap_and_add(x, h, L)
         y_segment = conv(x_segment, h);
         
         % Add the convolved segment to the correct position in the output signal
-        y(k*L + 1 : k*L + N) = y(k*L + 1 : k*L + N) + y_segment;
+        y_start = k*L + 1;
+        y_end = y_start + length(y_segment) - 1;
+        
+        y(y_start:y_end) = y(y_start:y_end) + y_segment;
     end
 end

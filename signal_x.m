@@ -8,15 +8,7 @@ if exist('x', 'var')
     % Define the time vector
     n = 0:length(x)-1;  % Assuming the signal starts at n=0
 
-    % Plot the signal in the time domain (original plot)
-    figure;
-    stem(n, x, 'filled');
-    title('Signal in Time Domain original');
-    xlabel('n (samples)');
-    ylabel('x[n]');
-    grid on;
 
-    
     % Plot a specific portion of the signal (zoomed in)
     start_index = 1;  % Starting index for zooming in
     end_index = min(length(x), 1000);  % Ending index for zooming in (adjust as needed)
@@ -32,18 +24,27 @@ if exist('x', 'var')
     grid on;
 
     
-    % Downsample the signal if it's too long
-    factor = 100;  % Adjust the downsampling factor as needed
-    x_downsampled = x(1:factor:end);
-    n_downsampled = 0:factor:length(x_downsampled)*factor-1;
+%     % Plot the signal in the time domain (original plot)
+%     figure;
+%     stem(n, x, 'filled');
+%     title('Signal in Time Domain original');
+%     xlabel('n (samples)');
+%     ylabel('x[n]');
+%     grid on;
 
-    % Plot the downsampled signal in the time domain
-    figure;
-    plot(n_downsampled, x_downsampled);
-    title('Downsampled Signal in Time Domain');
-    xlabel('n (samples)');
-    ylabel('x[n]');
-    grid on;
+        
+%     % Downsample the signal if it's too long
+%     factor = 100;  % Adjust the downsampling factor as needed
+%     x_downsampled = x(1:factor:end);
+%     n_downsampled = 0:factor:length(x_downsampled)*factor-1;
+% 
+%     % Plot the downsampled signal in the time domain
+%     figure;
+%     plot(n_downsampled, x_downsampled);
+%     title('Downsampled Signal in Time Domain');
+%     xlabel('n (samples)');
+%     ylabel('x[n]');
+%     grid on;
 else
     disp('The variable x is not found in the loaded .mat file.');
 end
