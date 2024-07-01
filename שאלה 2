@@ -1,0 +1,19 @@
+1:
+r=cos(2pi5t)(=s(t))+cos(2pi10t)(=v(t))=s(t)+v(t)
+sampling in Fs ratio:
+x[n]=cos(2pi(f0/Fs)n]
+r[n]=cos(2pi(5/Fs)n)(=s[n])+cos(2pi(10/Fs)n](=v[n])
+r[e^(jw)]=s[e^(jw)]+v[e^(jw)]
+cos(2pifn)->delta(w+-w0)
+r[e^(jw)]=delta(+-5pi/Fs)+delta(+-10pi/Fs)
+5/Fs*pi<pi/4,10pi/Fs<pi->40<Fs<80
+2:
+ןמ ךןמקשר בםמהקךואןםמ L=Nּּ+M-1
+2048=N+102-1
+N=1947
+4:Fs=25
+r[n]=cos(2pi(5/25)n)+cos(2pi(10/25)n](=v[n])
+5/25*pi,10/25*pi<pi/4->both in "*1" filter:
+if r[n]=r[n/2] using interpulation:
+equal to Fs=50->40<Fs<80->r=s+v*A(A<<1)=s[n]
+
