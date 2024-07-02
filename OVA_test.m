@@ -1,4 +1,6 @@
-
+close;
+clear;
+clc;
 % Define the input signal, impulse response, and segment length
 x = [1, 2, 3, 4, 5, 6, 7, 8];
 h = [1, -1];

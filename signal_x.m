@@ -1,4 +1,3 @@
-
 % Load the signal from the .mat file
 load('sig_x.mat');  % This loads the variable 'x' from 'sig_x.mat'
 

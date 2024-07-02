@@ -1,4 +1,6 @@
-
+close;
+clear;
+clc;
 % Load the signals from the .mat files
 load('sig_x.mat');     % This loads the variable 'x' from 'sig_x.mat'
 load('filter_2.mat');  % This loads the variable 'h' from 'filter_1.mat'
