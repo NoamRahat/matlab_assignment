@@ -96,8 +96,8 @@ xlabel('Sample');
 ylabel('Amplitude');
 
 % Compute and plot the Fourier Transform of the convolved signals
-y1_fft = fftshift(y1_linear);
-y2_fft = fftshift(y2_linear);
+y1_fft = fft(y1_linear);
+y2_fft = fft(y2_linear);
 
 f = (0:length(y1_fft)-1) * (18000 / length(y1_fft) / downsample_rate);
 
