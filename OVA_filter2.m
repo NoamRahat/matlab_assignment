@@ -1,9 +1,16 @@
-close;
+close all;
 clear;
 clc;
-% Load the signals from the .mat files
-load('sig_x.mat');     % This loads the variable 'x' from 'sig_x.mat'
-load('filter_2.mat');  % This loads the variable 'h' from 'filter_1.mat'
+% Load the signal and filters
+sig_x = load('sig_x.mat');
+filter_1 = load('filter_1.mat');
+filter_2 = load('filter_2.mat');
+
+x = sig_x.x; % Assuming the variable in sig_x.mat is named 'x'
+filter_1_varname = fieldnames(filter_1);
+filter_2_varname = fieldnames(filter_2);
+
+h = filter_2.(filter_2_varname{1}); % Access the first variable in filter_2.mat
 
 % Check if the variables 'x' and 'h' exist in the workspace
 if exist('x', 'var') && exist('h', 'var')
@@ -23,19 +30,22 @@ if exist('x', 'var') && exist('h', 'var')
     
     % Define the zoom range (adjust as needed)
     zoom_start = 1;
-    zoom_end = 1000; % Plot first 5000 samples for better visibility
+    zoom_end = 500; % Plot first 5000 samples for better visibility
     
     plot(n(zoom_start:zoom_end), y(zoom_start:zoom_end));
     title('Zoomed Result of Convolution using Overlap and Add - filter2');
     xlabel('n (samples)');
     ylabel('y[n]');
     grid on;
+
+
+    % Define the number of points for the FFT (e.g., 1024)
+    N = 1024;
+
+    % Compute and plot the DTFT
+    dtft_plot(y, N);
+
 else
     disp('The variable x or h is not found in the loaded .mat file.');
 end
 
-% Define the number of points for the FFT (e.g., 1024)
-N = 1024;
-
-% Compute and plot the DTFT
-dtft_plot(y, N);

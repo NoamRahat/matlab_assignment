@@ -48,6 +48,7 @@ if exist('x', 'var')
     active_indices = find(magnitude > threshold);
     active_frequencies = f(active_indices);
 
+
     fprintf('Active frequencies in the signal (above threshold):\n');
     disp(active_frequencies);
 
@@ -61,44 +62,18 @@ if exist('x', 'var')
         fprintf('A%d * cos(2 * pi * %.0f * n / %.0f + %.2f)\n', i, abs(active_frequencies(i)), fs, phases(i));
     end
     
-%     % Plot the signal in the time domain (original plot)
-%     figure;
-%     stem(n, x, 'filled');
-%     title('Signal in Time Domain original');
-%     xlabel('n (samples)');
-%     ylabel('x[n]');
-%     grid on;
 
-        
-%     % Downsample the signal if it's too long
-%     factor = 100;  % Adjust the downsampling factor as needed
-%     x_downsampled = x(1:factor:end);
-%     n_downsampled = 0:factor:length(x_downsampled)*factor-1;
-% 
-%     % Plot the downsampled signal in the time domain
-%     figure;
-%     plot(n_downsampled, x_downsampled);
-%     title('Downsampled Signal in Time Domain');
-%     xlabel('n (samples)');
-%     ylabel('x[n]');
-%     grid on;
+
+
 else
     disp('The variable x is not found in the loaded .mat file.');
 end
 
-% % Check if the variable 'x' exists in the workspace
-% if exist('x', 'var')
-%     % Define the sampling rate (e.g., 44100 Hz for CD-quality audio)
-%     fs = 44100;
-% 
-%     % Play the signal using sound (ensure that 'x' is a row vector)
-%     sound(x, fs);
-% end
 
 
 % Define the number of points for the FFT (e.g., 1024)
-N = 1024;
+% N = 1024;
 
 % Compute and plot the DTFT
-dtft_plot(x, N);
+% dtft_plot(x, N);
 
