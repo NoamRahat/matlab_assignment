@@ -15,14 +15,16 @@ h = filter_1.(filter_1_varname{1}); % Access the first variable in filter_1.mat
 % Check if the variables 'x' and 'h' exist in the workspace
 if exist('x', 'var') && exist('h', 'var')
     % Define the segment length (L)
-    L = 1024;  % Adjust the segment length as needed
+    L = 64;  % Adjust the segment length as needed
 
+    tic;
     % Perform the convolution using the overlap_and_add function
-    y = overlap_and_add(x, h, L);
+    [y, num_mult, num_add] = overlap_and_add(x, h, L);
+    time = toc;
 
-    % Print the result
-%     disp('The result of the convolution is:');
-%     disp(y);
+    fprintf('Linear convolution with Filter 1 (BPF) took %.6f seconds.\n', time);
+    fprintf('Number of multiplications with Filter 1: %d\n', num_mult);
+    fprintf('Number of additions with Filter 1: %d\n', num_add);
 
     % Plot the result in the time domain (zoomed in to improve visibility)
     figure;

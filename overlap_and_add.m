@@ -1,4 +1,4 @@
-function y = overlap_and_add(x, h, L)
+function [y, num_mult, num_add] = overlap_and_add(x, h, L)
     % x: Input signal
     % h: Impulse response of the FIR filter
     % L: Segment length
@@ -9,14 +9,20 @@ function y = overlap_and_add(x, h, L)
     
     % Initialize the output signal
     y = zeros(1, L * num_segments + M - 1);
+    num_mult = 0;
+    num_add = 0;
+
 
     for k = 0:num_segments-1
         % Extract the k-th segment of x
         x_segment = x(k*L + 1 : min((k+1)*L, length(x)));
         
         % Convolve the segment with the impulse response h
-        y_segment = conv(x_segment, h);
-        
+        [y_segment, mult, add]  = linear_conv(x_segment, h);
+
+        num_mult = num_mult + mult;
+        num_add = num_add + add;
+
         % Add the convolved segment to the correct position in the output signal
         y_start = k*L + 1;
         y_end = y_start + length(y_segment) - 1;
