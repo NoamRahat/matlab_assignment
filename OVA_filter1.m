@@ -15,7 +15,7 @@ h = filter_1.(filter_1_varname{1}); % Access the first variable in filter_1.mat
 % Check if the variables 'x' and 'h' exist in the workspace
 if exist('x', 'var') && exist('h', 'var')
     % Define the segment length (L)
-    L = 64;  % Adjust the segment length as needed
+    L = 1024;  % Adjust the segment length as needed
 
     tic;
     % Perform the convolution using the overlap_and_add function
