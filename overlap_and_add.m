@@ -22,8 +22,8 @@ function [y, num_mult, num_add] = overlap_and_add(x, h, L)
         num_mult = num_mult + mult;
         num_add = num_add + add;
 
-        fprintf('Number of multiplications : %d\n', num_mult);
-        fprintf('Number of additions: %d\n', num_add);
+        %fprintf('Number of multiplications : %d\n', num_mult);
+        %fprintf('Number of additions: %d\n', num_add);
 
         % Add the convolved segment to the correct position in the output signal
         y_start = k*L + 1;

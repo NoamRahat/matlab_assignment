@@ -18,7 +18,7 @@ function [y, num_mult, num_add] = linear_conv(x, h)
                 num_add = num_add + 1;  % Count additions (excluding first in each row)
             end
         end
-        fprintf('Number of multiplications : %d\n', num_mult);
+        %fprintf('Number of multiplications : %d\n', num_mult);
 
     end
 end
