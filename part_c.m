@@ -156,7 +156,7 @@ title('Zoomed Result of Convolution using Overlap and Add - filter2');
 xlabel('n (samples)');
 ylabel('y2[n]');
 
-%% Q4:
+%% Q5:
 %% Compare the running times of the two methods on the same graph as a function of frame size. Which method has better in terms of performance?
 %% Draw on the same graph the output of the 2 types of convolution for each of the filters and show that you performed OVA correctly.
 % Linear Convolution using the provided linear_conv function
