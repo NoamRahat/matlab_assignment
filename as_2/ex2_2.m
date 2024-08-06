@@ -2,6 +2,9 @@ clc;
 clear;
 close all;
 
+% Note that this script has the capacity to run for rect, hann and kaiser
+% window. Just look for the comment CHANGE HERE and change accordingly.
+
 % Define the different values of N
 N_values = [16, 32, 64, 128, 256];
 
