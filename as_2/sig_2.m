@@ -65,16 +65,7 @@ omega_s = 2 * Fs * tan(Omega_s / (2 * Fs));
 % Step 4: Design the analog Butterworth filter
 [b, a] = butter(n, Wn, 's');
 
-% Step 5: Convert to digital filter using bilinear transformation
-[bz, az] = bilinear(b, a, Fs);
-%[bz, az] = butter(n, Wn, 'lowpass');
-
-% Step 6: Plot the magnitude response of the digital filter
-figure;
-freqz(bz, az, 1024, Fs);
-title('Magnitude Response of Digital Filter H(e^{j\omega})');
-
-% Step 7: Plot the magnitude response of the Analog filter
+% Plot the magnitude response of the Analog filter
 [Ha, wa] = freqs(b, a, 1024);
 f_a = wa / (2 * pi);  % Convert rad/sec to Hz
 Ha_dB = 20 * log10(abs(Ha));  % Convert magnitude to dB
@@ -84,8 +75,52 @@ plot(f_a, Ha_dB);
 title('Magnitude Response of Analog Filter H_c(jΩ) in dB');
 xlabel('Frequency (Hz)');
 ylabel('Magnitude (dB)');
-xlim([3400, 4000]);
+%xlim([3400, 4000]);
 
+omega = logspace(log10(1), log10(1e4), 1000); % Frequency range (rad/s)
+[Ha, wa] = freqs(b, a, omega);
+
+figure;
+semilogx(wa, abs(Ha));
+title('Magnitude Response of Analog Butterworth Filter');
+xlabel('Frequency (rad/s)');
+ylabel('Magnitude');
+grid on;
+xlim([min(omega) max(omega)]);
+
+% Step 5: Convert to digital filter using bilinear transformation
+[bz, az] = bilinear(b, a, Fs);
+
+% Step 6: Plot the magnitude response of the digital filter
+figure;
+freqz(bz, az, 1024, Fs);
+title('Magnitude Response of Digital Filter H(e^{j\omega})');
+
+% Step 7: Plot the Frequency Response of the Equivalent Analog Filter
+% Compute the frequency response
+[H, w] = freqz(bz, az, 1024, 'whole');
+
+% Adjust the frequency vector to include negative frequencies
+w = w - 2*pi*(w > pi);
+
+% Convert digital angular frequency to normalized angular frequency (omega/Fs)
+omega_normalized = w / Fs;
+
+% Convert to Hz
+F_analog = omega_normalized * Fs / (2 * pi);
+
+% Compute the squared magnitude response
+H_squared = abs(H).^2;
+
+% Plot the squared magnitude response
+figure;
+plot(F_analog, H_squared);
+title('Squared Magnitude Response of Equivalent Analog Filter H_c(j\Omega)');
+xlabel('Frequency (Hz)');
+ylabel('|H(j\omega)|^2');
+grid on;
+
+%%
 % Set up frequency range for detailed comparison
 f = linspace(0, Fs/2, 1000);  % Up to Nyquist frequency
 w = 2*pi*f;                   % Angular frequency
