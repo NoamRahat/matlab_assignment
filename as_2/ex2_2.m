@@ -8,7 +8,7 @@ close all;
 % Define the different values of N
 N_values = [16, 32, 64, 128, 256];
 
-name_window = 'Kaiser Window'; % CHANGE HERE!!!
+name_window = 'Rect Window'; % CHANGE HERE!!!
 for N = N_values  
     % Parameters
     % N = 16; % Number of points in the window
@@ -17,14 +17,14 @@ for N = N_values
     beta = 5.65; % % beta parameter for the Kaiser window
     
     % CHANGE HERE!!!
-    A0 = 0.001; % Amplitude of the first sinusoid
+    A0 = 1; % Amplitude of the first sinusoid
     A1 = 1; % Amplitude of the second sinusoid (equal to A0)
     
     delta_f_hann = 4 / N; % Frequency difference in Hz
     delta_f_rect = 2 / N;
     delta_f_kaiser = (60 - 7.95) / (14.36 * N);
     
-    delta_f = delta_f_kaiser; % CHANGE HERE!!!
+    delta_f = delta_f_rect; % CHANGE HERE!!!
 
     disp(['Minimum frequency difference for N = ', num2str(N), ' (A0, A1 = ', num2str(A0), ', ', num2str(A1), ') with ', name_window, ' is ', num2str(delta_f), ' Hz']);
     
@@ -42,7 +42,6 @@ for N = N_values
     % Combined signal
     x = x0 + x1;
     
-    
     % Define the rectangular window
     rect_window = ones(N, 1);
     % Apply the rectangular window to the signal
@@ -53,19 +52,22 @@ for N = N_values
     hann_window = 0.5 * (1 - cos(2 * pi * (0:N-1)' / (N-1)));
     x_windowed_hann = x .* hann_window';
     
-    
     % Generate the Kaiser window
     kaiser_window = kaiser(N, beta);
-    
     % Apply the Kaiser window to the signal
     x_windowed_kaiser = x .* kaiser_window';
     
-    x_windowed = x_windowed_kaiser; % CHANGE HERE!!!
+
+    x_windowed = x_windowed_rect; % CHANGE HERE!!!
+    
+    N2 = 256; % Zero-padding length
+    x_windowed_padded = [x_windowed, zeros(1, N2-N)];
     
     % Compute the FFT
-    X = fft(x_windowed, N);
-    f = (0:N-1)*(fs/N);
-    
+    X = fft(x_windowed_padded, N2);
+    X = fftshift(X);
+    f = (0:N2-1)*(fs/N2);
+
     % Plot the magnitude spectrum
     figure;
     plot(f, 20*log10(abs(X)));
